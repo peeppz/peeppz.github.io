@@ -7,7 +7,8 @@
 		<link rel="stylesheet" href="files/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="index.css">
     </headS>
-    <body onload="muatDaftarData();">
+	
+   <body onload="muatDaftarData();">
         <div class="col-md-8 col-md-offset-2" ng-controller="listContactCtrl">
             <div class="page-header">
                 <h1>
@@ -20,6 +21,7 @@
                 </ul>
             </h2>
             </div>
+		
             <div id="tambah-data" class="well" style="display:none;">
                 <form id="form-data">
                     <div id="name-group" class="form-group">
@@ -50,13 +52,13 @@
                     <input type="reset" value="Reset" onclick="" class="btn btn-warning btn-small"/>
                 </form>
             </div>
+		
             <div id="edit-data" class="well" style="display:none;">
                 <form id="eform-data">
                     <div id="name-group" class="form-group">
                         <label>Nama:</label> 
                         <input type="text" class="form-control" id="enama" name="nama" placeholder="contoh: Smitty Werben Man Jensen" /><br/>
                     </div>
-
                     <div id="alamat-group" class="form-group">
                         <label>Alamat :</label> 
                         <input type="text" class="form-control" id="ealamat" name="alamat" placeholder="contoh: Jalan Bikini Bottom" /><br/>
@@ -78,20 +80,19 @@
                     <input type="button" value="Cancel" onclick="gantiMenu('list-data');" class="btn btn-warning btn-small"/>
                 </form>
             </div>
+		
             <div id="list-data" class="well">
                 Tidak ada data...
             </div>
-        </div>
-        
+        </div> 
     </body>
+	
     <script type="text/javascript">
         function muatDaftarData(){
             if (localStorage.daftar_data && localStorage.id_data){
-            
                 daftar_data = JSON.parse(localStorage.getItem('daftar_data'));
-               
                 var data_app = "";
-                
+             
                 if (daftar_data.length > 0){
                     data_app = '<table class="table">';
                     data_app += '<thead>'+
@@ -113,8 +114,7 @@
                                           '<td>'+ daftar_data[i].prodi + ' </td>'+
                                           '<td><a class="btn btn-danger btn-small" href="javascript:void(0)" onclick="hapusData(\''+daftar_data[i].id_data+'\')">Hapus</a></td>'+
                                           '<td><a class="btn btn-warning btn-small" href="javascript:void(0)" onclick="editData(\''+daftar_data[i].id_data+'\')">Edit</a></td>';
-                        data_app += '</tr>';
-                        
+                        data_app += '</tr>';      
                     }
                    data_app += '</tbody></table>';
                
@@ -131,7 +131,6 @@
         }
 		
 		function editData(id){
-		
             if (localStorage.daftar_data && localStorage.id_data){
                 daftar_data = JSON.parse(localStorage.getItem('daftar_data'));			
 				idx_data = 0;
@@ -146,10 +145,8 @@
                     }
                     idx_data ++;
                 }
-				gantiMenu('edit-data');
-				
-            }
-			
+				gantiMenu('edit-data');		
+            }	
 		}
         
         function simpanData(){
@@ -167,7 +164,7 @@
                 id_data = 0;
             }
             id_data ++;
-            daftar_data.push({'nama':nama, 'alamat':alamat, 'usia':usia, 'nim':nim, 'prodi':prodi });
+            daftar_data.push({'id_data':id_data, 'nama':nama, 'alamat':alamat, 'usia':usia, 'nim':nim, 'prodi':prodi });
             localStorage.setItem('daftar_data', JSON.stringify(daftar_data));
             localStorage.setItem('id_data', id_data);
             document.getElementById('form-data').reset();
@@ -228,3 +225,4 @@
         }
     </script>
 </html>
+
